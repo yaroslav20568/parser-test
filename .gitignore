@@ -3,4 +3,4 @@ dist/
 *.log
 .env
 .DS_Store
-results-parsing.json
+results/
