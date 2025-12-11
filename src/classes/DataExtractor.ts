@@ -49,7 +49,7 @@ export class DataExtractor {
 
 			const nameElIndex = $nameEl.index();
 			const $allChildren = $parent.children();
-			
+
 			for (let i = nameElIndex + 1; i < $allChildren.length; i++) {
 				const $child = $($allChildren[i]);
 				if ($child.is('p')) {
@@ -66,7 +66,9 @@ export class DataExtractor {
 			}
 
 			if (!description) {
-				const $description = $parent.find('p.text-sm.mt-1, p[class*="text-sm"][class*="mt-1"]').first();
+				const $description = $parent
+					.find('p.text-sm.mt-1, p[class*="text-sm"][class*="mt-1"]')
+					.first();
 				if ($description.length > 0) {
 					description = $description.text().trim();
 				}
@@ -76,8 +78,6 @@ export class DataExtractor {
 				skippedNoDescription++;
 				return;
 			}
-
-			description = description.replace(/Подробнее.*/gi, '').trim();
 
 			if (description && description.length >= 10) {
 				parsers.push({ name, description });
