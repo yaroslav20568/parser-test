@@ -4,14 +4,14 @@ export class BrowserService {
 	private browser: Browser | null = null;
 	private page: Page | null = null;
 
-	async launch(): Promise<void> {
+	launch = async (): Promise<void> => {
 		this.browser = await puppeteer.launch({
 			headless: 'new',
 			args: ['--no-sandbox', '--disable-setuid-sandbox'],
 		});
-	}
+	};
 
-	async createPage(): Promise<Page> {
+	createPage = async (): Promise<Page> => {
 		if (!this.browser) {
 			throw new Error('Браузер не запущен');
 		}
@@ -20,29 +20,29 @@ export class BrowserService {
 			'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
 		);
 		return this.page;
-	}
+	};
 
-	async navigateTo(url: string): Promise<void> {
+	navigateTo = async (url: string): Promise<void> => {
 		if (!this.page) {
 			throw new Error('Страница не создана');
 		}
 		console.log(`Загрузка страницы: ${url}`);
 		await this.page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 		await this.page.waitForTimeout(3000);
-	}
+	};
 
-	async getPageContent(): Promise<string> {
+	getPageContent = async (): Promise<string> => {
 		if (!this.page) {
 			throw new Error('Страница не создана');
 		}
 		return await this.page.content();
-	}
+	};
 
-	async close(): Promise<void> {
+	close = async (): Promise<void> => {
 		if (this.browser) {
 			await this.browser.close();
 			this.browser = null;
 			this.page = null;
 		}
-	}
+	};
 }

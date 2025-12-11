@@ -18,7 +18,7 @@ export class Parser {
 		this.fileService = new FileService(outputPath);
 	}
 
-	async parse(): Promise<IParserInfo[]> {
+	parse = async (): Promise<IParserInfo[]> => {
 		try {
 			await this.browserService.launch();
 			await this.browserService.createPage();
@@ -33,13 +33,13 @@ export class Parser {
 		} finally {
 			await this.browserService.close();
 		}
-	}
+	};
 
-	async save(parsers: IParserInfo[]): Promise<void> {
+	save = async (parsers: IParserInfo[]): Promise<void> => {
 		await this.fileService.save(parsers);
-	}
+	};
 
-	async run(): Promise<void> {
+	run = async (): Promise<void> => {
 		try {
 			const parsers = await this.parse();
 			await this.save(parsers);
@@ -47,5 +47,5 @@ export class Parser {
 			console.error('Ошибка при выполнении парсинга:', error);
 			throw error;
 		}
-	}
+	};
 }

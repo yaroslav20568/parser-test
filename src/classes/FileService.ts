@@ -9,7 +9,7 @@ export class FileService {
 		this.outputPath = outputPath;
 	}
 
-	async save(parsers: IParserInfo[]): Promise<void> {
+	save = async (parsers: IParserInfo[]): Promise<void> => {
 		const dir = path.dirname(this.outputPath);
 		if (!fs.existsSync(dir)) {
 			fs.mkdirSync(dir, { recursive: true });
@@ -18,9 +18,9 @@ export class FileService {
 		fs.writeFileSync(this.outputPath, json, 'utf-8');
 		console.log(`Результаты сохранены в: ${this.outputPath}`);
 		console.log(`Всего сохранено: ${parsers.length} парсеров`);
-	}
+	};
 
-	async saveWordsInfo(wordsInfo: IWordsInfo, outputPath: string): Promise<void> {
+	saveWordsInfo = async (wordsInfo: IWordsInfo, outputPath: string): Promise<void> => {
 		const dir = path.dirname(outputPath);
 		if (!fs.existsSync(dir)) {
 			fs.mkdirSync(dir, { recursive: true });
@@ -28,5 +28,5 @@ export class FileService {
 		const json = JSON.stringify(wordsInfo, null, 2);
 		fs.writeFileSync(outputPath, json, 'utf-8');
 		console.log(`Информация о словах сохранена в: ${outputPath}`);
-	}
+	};
 }

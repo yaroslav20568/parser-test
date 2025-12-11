@@ -2,12 +2,12 @@ import * as cheerio from 'cheerio';
 import { IParserInfo } from '../types';
 
 export class DataExtractor {
-	extractParserName(text: string): string | null {
+	extractParserName = (text: string): string | null => {
 		const match = text.match(/([A-Za-z0-9_]+(?:::[A-Za-z0-9_]+)+)/);
 		return match ? match[1] : null;
-	}
+	};
 
-	extractParsersFromHtml(html: string): IParserInfo[] {
+	extractParsersFromHtml = (html: string): IParserInfo[] => {
 		const $ = cheerio.load(html);
 		const parsers: IParserInfo[] = [];
 		const seenNames = new Set<string>();
@@ -91,5 +91,5 @@ export class DataExtractor {
 		console.log(`Пропущено без описания: ${skippedNoDescription}`);
 
 		return parsers;
-	}
+	};
 }

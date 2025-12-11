@@ -15,23 +15,23 @@ export class WordCounter {
 		this.fileService = new FileService('');
 	}
 
-	async countWords(): Promise<number> {
+	countWords = async (): Promise<number> => {
 		const html = await this.fetchHtml(this.url);
 		const text = this.extractText(html);
 		const words = this.extractWords(text);
 		return words.filter((word) => word.length > 3).length;
-	}
+	};
 
-	async save(wordCount: number): Promise<void> {
+	save = async (wordCount: number): Promise<void> => {
 		const wordsInfo: IWordsInfo = {
 			url: this.url,
 			count: wordCount,
 			description: 'Количество слов длиной более 3 символов на главной странице',
 		};
 		await this.fileService.saveWordsInfo(wordsInfo, this.outputPath);
-	}
+	};
 
-	async run(): Promise<void> {
+	run = async (): Promise<void> => {
 		try {
 			const wordCount = await this.countWords();
 			await this.save(wordCount);
@@ -39,9 +39,9 @@ export class WordCounter {
 			console.error('Ошибка при подсчете слов:', error);
 			throw error;
 		}
-	}
+	};
 
-	private async fetchHtml(url: string): Promise<string> {
+	private fetchHtml = async (url: string): Promise<string> => {
 		const response = await axios.get(url, {
 			headers: {
 				'User-Agent':
@@ -49,20 +49,20 @@ export class WordCounter {
 			},
 		});
 		return response.data;
-	}
+	};
 
-	private extractText(html: string): string {
+	private extractText = (html: string): string => {
 		const $ = cheerio.load(html);
 		$('script').remove();
 		$('style').remove();
 		$('noscript').remove();
 		return $('body').text() || $.text();
-	}
+	};
 
-	private extractWords(text: string): string[] {
+	private extractWords = (text: string): string[] => {
 		return text
 			.replace(/[^\p{L}\p{N}\s]/gu, ' ')
 			.split(/\s+/)
 			.filter((word) => word.trim().length > 0);
-	}
+	};
 }
