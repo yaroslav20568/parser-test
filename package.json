@@ -1,24 +1,28 @@
 {
-  "name": "parser",
-  "version": "1.0.0",
-  "description": "A parser for extracting parser names and descriptions from a-parser.com",
-  "main": "dist/parser.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "node dist/parser.js",
-    "dev": "ts-node src/parser.ts"
-  },
-  "keywords": ["parser", "scraper"],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "puppeteer": "^21.6.1"
-  },
-  "devDependencies": {
-    "@types/node": "^20.10.6",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
-  }
+	"name": "parser",
+	"version": "1.0.0",
+	"description": "A parser for extracting parser names and descriptions from a-parser.com",
+	"main": "dist/main.js",
+	"scripts": {
+		"build": "tsc",
+		"start": "node dist/main.js",
+		"dev": "ts-node src/main.ts"
+	},
+	"keywords": [
+		"parser",
+		"scraper"
+	],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@types/cheerio": "^0.22.35",
+		"axios": "^1.13.2",
+		"cheerio": "^1.1.2",
+		"puppeteer": "^21.6.1"
+	},
+	"devDependencies": {
+		"@types/node": "^20.10.6",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.3.3"
+	}
 }
-
-
