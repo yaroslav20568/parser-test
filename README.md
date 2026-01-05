@@ -1,4 +1,4 @@
-# Parser Project
+# Parser Project(Тестовое задание)
 
 Проект для парсинга информации с сайта a-parser.com
 
@@ -128,7 +128,7 @@ npm start
 
 ---
 
-# Parser Project
+# Parser Project(Test Assignment)
 
 Project for parsing information from a-parser.com website
 
